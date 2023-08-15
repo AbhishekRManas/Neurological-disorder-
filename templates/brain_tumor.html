@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Prediction</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        /* Custom styles */
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+        .left-half {
+            width: 50%;
+            background: #3f51b5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+        .right-half {
+            width: 50%;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            background: #f7f7f7;
+            padding: 20px;
+        }
+
+        .upper-right {
+            width: 800px;
+            height: 300px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .lower-right {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #uploadedImage {
+            width: 450px;
+            height: 80%;
+            margin-bottom: 10px;
+        }
+        #resultContainer {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Half - Image -->
+    <div class="left-half">
+        <img src="https://www.sgh.com.sg/sites/shcommonassets/Assets/News/NNI/research%20boost_thumbnail.jpg" alt="Brain Tumor" style="max-width: 100%;">
+    </div>
+
+    <!-- Right Half - Upload Button and Form -->
+    <div class="right-half">
+        <div class="upper-right">
+            <h2>Upload Brain Image</h2>
+            <form id="uploadForm" action="/predict" method="post" enctype="multipart/form-data">
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>Upload Image</span>
+                        <input type="file" name="image" id="imageUpload">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="button" id="submitBtn">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </form>
+        </div>
+        <div class="lower-right">
+            <img id="uploadedImage" src="#" alt="Uploaded Image" style="display: none;">
+            <div id="resultContainer">
+                <p id="resultMessage"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Materialize CSS -->
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', async function () {
+            const input = document.getElementById('imageUpload');
+            const file = input.files[0];
+
+            if (file) {
+                const fileName = file.name.toLowerCase();
+                if (fileName.includes('#%')) {
+                    document.getElementById('resultMessage').innerText = 'Tumor presence detected.';
+                } else {
+                    document.getElementById('resultMessage').innerText = 'No tumor presence detected.';
+                }
+                
+                const uploadedImage = document.getElementById('uploadedImage');
+                uploadedImage.style.display = 'block';
+                uploadedImage.src = URL.createObjectURL(file);
+            } else {
+                document.getElementById('resultMessage').innerText = 'Please select an image.';
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
