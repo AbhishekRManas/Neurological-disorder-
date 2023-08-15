@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stroke Dataset Preview</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add custom styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            background-color: #fff;
+            border-collapse: collapse;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .important-observations {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Add navigation bar to link back to the home page -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Brain Stroke</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="dataset.html">Dataset</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+          </ul>
+    </nav>
+
+    <!-- Create a container for the dataset preview -->
+    <div class="container mt-4">
+        <h1 class="mb-4">Stroke Dataset Preview</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Hypertension</th>
+                    <th>Heart Disease</th>
+                    <th>Ever Married</th>
+                    <th>Work Type</th>
+                    <th>Residence Type</th>
+                    <th>Avg Glucose Level</th>
+                    <th>BMI</th>
+                    <th>Smoking Status</th>
+                    <th>Stroke</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Male</td>
+                    <td>67.0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>Yes</td>
+                    <td>Private</td>
+                    <td>Urban</td>
+                    <td>228.69</td>
+                    <td>36.6</td>
+                    <td>formerly smoked</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Male</td>
+                    <td>80.0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>Yes</td>
+                    <td>Private</td>
+                    <td>Rural</td>
+                    <td>105.92</td>
+                    <td>32.5</td>
+                    <td>never smoked</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Female</td>
+                    <td>49.0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>Yes</td>
+                    <td>Private</td>
+                    <td>Urban</td>
+                    <td>171.23</td>
+                    <td>34.4</td>
+                    <td>smokes</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Female</td>
+                    <td>79.0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>Yes</td>
+                    <td>Self-employed</td>
+                    <td>Rural</td>
+                    <td>174.12</td>
+                    <td>24.0</td>
+                    <td>never smoked</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Male</td>
+                    <td>81.0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>Yes</td>
+                    <td>Private</td>
+                    <td>Urban</td>
+                    <td>186.21</td>
+                    <td>29.0</td>
+                    <td>formerly smoked</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add important observations section -->
+    <div class="container important-observations">
+        <h2>Important Observations</h2>
+        <ul>
+            <li>Age and BMI have the highest positive correlation.</li>
+            <li>Percentage of Males experiencing Stroke is higher than Females.</li>
+            <li>People who have had some kind of Heart Disease have higher risk of experiencing a Brain Stroke.</li>
+            <li>Married Couples have higher risk of Brain Stroke.</li>
+            <li>Those who live in Urban have a greater risk of Brain Stroke than those who live in Rural areas. Maybe because of hectic lifestyle in Urban Areas.</li>
+        </ul>
+    </div>
+
+    <!-- Add Bootstrap and jQuery JS links if needed -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
