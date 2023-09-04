@@ -10,11 +10,18 @@
         /* Custom styles */
         body {
             display: flex;
-            height: 100vh;
+            flex-direction: column; /* Stack content vertically */
             margin: 0;
+            height: 100vh; /* Set height of the whole body */
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: row; /* Arrange left and right halves side by side */
         }
         .left-half {
             width: 50%;
+            height: 94vh;
             background: #3f51b5;
             display: flex;
             justify-content: center;
@@ -23,6 +30,7 @@
         }
         .right-half {
             width: 50%;
+            height: 94vh;
             display: grid;
             grid-template-rows: auto 1fr;
             justify-content: center;
@@ -53,70 +61,93 @@
         }
 
         #uploadedImage {
-            width: 450px;
-            height: 80%;
+            width: 300px;
+            height: 60%;
             margin-bottom: 10px;
         }
         #resultContainer {
             text-align: center;
         }
+
+        .navbar {
+            background-color: #343a40;
+            height: 58px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-nav .nav-link {
+            color: #9A9DA0; 
+            font-size: 16px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ccc;
+        }
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('index') }}" style="font-size: 22px; color: rgb(228, 228, 228);">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('index') }}">Brain Stroke</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('brain_tumor') }}">Brain Tumor</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('dataset') }}">Dataset</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('about') }}">About</a>
+            </li>
+        </ul>
+    </nav>
+    
+    <div class="content-wrapper">
     <!-- Left Half - Image -->
     <div class="left-half">
-        <img src="https://www.sgh.com.sg/sites/shcommonassets/Assets/News/NNI/research%20boost_thumbnail.jpg" alt="Brain Tumor" style="max-width: 100%;">
+        <img src="{{ brain_tumor_image }}" alt="Brain Tumor" style="max-width: 100%;">
     </div>
 
     <!-- Right Half - Upload Button and Form -->
     <div class="right-half">
         <div class="upper-right">
-            <h2>Upload Brain Image</h2>
-            <form id="uploadForm" action="/predict" method="post" enctype="multipart/form-data">
+            <h1>Brain Tumor Detection</h1>
+            <form method="POST" enctype="multipart/form-data">
                 <div class="file-field input-field">
                     <div class="btn">
                         <span>Upload Image</span>
-                        <input type="file" name="image" id="imageUpload">
+                        <input type="file" name="file" id="imageUpload">
                     </div>
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="text">
                     </div>
                 </div>
-                <button class="btn waves-effect waves-light" type="button" id="submitBtn">Submit
+                <button class="btn waves-effect waves-light" type="submit" value="Upload and Predict">Submit
                     <i class="material-icons right">send</i>
                 </button>
-            </form>
+            </form> 
         </div>
         <div class="lower-right">
-            <img id="uploadedImage" src="#" alt="Uploaded Image" style="display: none;">
-            <div id="resultContainer">
-                <p id="resultMessage"></p>
-            </div>
+            {% if prediction %}
+                <h2>Prediction: {{ prediction }}</h2>
+            {% endif %}
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+            {% if uploaded_image %}
+                <img id="uploadedImage" src="{{ uploaded_image }}" alt="Uploaded Image">
+            {% endif %}
         </div>
     </div>
-
+</div>
     <!-- Materialize CSS -->
-    <script>
-        document.getElementById('submitBtn').addEventListener('click', async function () {
-            const input = document.getElementById('imageUpload');
-            const file = input.files[0];
-
-            if (file) {
-                const fileName = file.name.toLowerCase();
-                if (fileName.includes('#%')) {
-                    document.getElementById('resultMessage').innerText = 'Tumor presence detected.';
-                } else {
-                    document.getElementById('resultMessage').innerText = 'No tumor presence detected.';
-                }
-                
-                const uploadedImage = document.getElementById('uploadedImage');
-                uploadedImage.style.display = 'block';
-                uploadedImage.src = URL.createObjectURL(file);
-            } else {
-                document.getElementById('resultMessage').innerText = 'Please select an image.';
-            }
-        });
-    </script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
 </body>
 </html>
