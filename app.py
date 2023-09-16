@@ -73,7 +73,7 @@ def index():
         return render_template('index.html', brain_stroke_image=brain_stroke_image)
 
 # Load the trained model using Keras
-Model = tf.keras.models.load_model("trained_model.h5")
+Model = tf.keras.models.load_model("brain_tumor_predicton.joblib")
 
 # Create the "uploads" directory if it doesn't exist
 if not os.path.exists("uploads"):
@@ -122,3 +122,14 @@ def brain_tumor():
             print(url_for('uploaded_file', filename="brain_tumor.jpg"))
 
     return render_template("brain_tumor.html", prediction=prediction, uploaded_image=uploaded_image, brain_tumor_image=brain_tumor_image)
+
+@app.route('/dataset', methods=["GET", "POST"])
+def dataset():
+    return render_template("dataset.html")
+
+@app.route('/about', methods=["GET", "POST"])
+def about():
+    return render_template("about.html")
+
+if __name__ == '__main__':
+    app.run(debug=True)
